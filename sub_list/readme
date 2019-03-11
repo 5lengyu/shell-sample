@@ -1,0 +1,5 @@
+This is to show how to sublist from a full list using awk and sed
+
+Importment notes to learn --
+1. NR==FNR
+2. sed to get rid of the 'line break' symbol
