@@ -6,6 +6,11 @@ services:
         restart: always
         environment:
             - MYSQL_ROOT_PASSWORD=password_key
+            - MYSQL_DATABASE: db
+            - MYSQL_USER: user
+            - MYSQL_PASSWORD: pwd
+        volumes:
+            - /host/dir:/var/lib/mysql/
         ports:
             - "3306:3306"
         networks:
@@ -14,6 +19,13 @@ services:
     redis:
         image: redis:latest
         container_name: redis
+        command: redis-server --requirepass ${REDIS_PASS:-password123} /usr/local/etc/redis/redis.conf
+        volumes:
+            - /host/dir/:/var/lib/redis
+            - /host/dir/:/data
+            - /host/redis.conf:/usr/local/etc/redis/redis.conf
+        environment:
+            - MYSQL_ROOT_PASSWORD=password_key
         restart: always
         ports:
             - "6379:6379"
