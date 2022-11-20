@@ -4,6 +4,7 @@ services:
         image: mariadb:latest
         container_name: mysql
         restart: always
+        command: --lower_case_table_names=1
         environment:
             - MYSQL_ROOT_PASSWORD=password_key
             - MYSQL_DATABASE: db
